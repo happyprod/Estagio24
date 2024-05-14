@@ -122,6 +122,31 @@ $fotodecapa = $row_infos["picture_background"];
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+
+
+    <script>
+        $(function () {
+            // Selecione todas as listas com a classe .sortable-list e inicialize o sortable para cada uma
+            $(".sortable-list").each(function (index) {
+                $(this).sortable({
+                    items: "> div:not(.fixed-item)", // Somente itens que não têm a classe .fixed-item são ordenáveis
+                    update: function (event, ui) {
+                        var order = $(this).sortable('toArray', { attribute: 'data-id' });
+                        console.log("Lista " + (index + 1) + ":", order);
+                    }
+                });
+            });
+
+            $(".sortable-list").disableSelection();
+        });
+    </script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -462,18 +487,25 @@ $fotodecapa = $row_infos["picture_background"];
                             <label for="example-text-input" class="col-auto col-form-label">País</label>
                             <input class="form-control mb-4" type="text" value="Amadora" id="alterar_localizacao">
 
-                            <!-- por scrollbar em vez disto -->
-                            <label for="example-text-input" class="col-auto col-form-label">Nome</label>
+
+                            <label for="example-text-input" class="col-auto col-form-label">Descrição</label>
                             <textarea class="form-control" id="alterar_sobre" rows="3"
-                                style="overflow-y: scroll; resize: none; height: 15em;"></textarea>
+                                style="height: 22.5em; overflow-y: scroll; resize: none;"></textarea>
+
+                            <div class="row mt-2">
+                                <div class="col-6 col-xl-6">
+                                    <p><strong>Caracteres:</strong> <span id="contador_caracteres">0</span></p>
+                                </div>
+                                <div class="col-6 col-xl-6">
+                                    <p><strong>Palavras:</strong> <span id="contador_palavras">0</span></p>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
 
 
                     <div class="container-fluid col-6 col-xl-6">
-
-
                         <div class="col-6 col-xl-12">
                             <div class="card p-3">
 
@@ -595,115 +627,57 @@ $fotodecapa = $row_infos["picture_background"];
 
 
 
-            <div class="d-none" id="ver_perfil">
+            <div class="d-none w-90 mx-auto" id="ver_perfil">
+                <div class="row mt-4">
+                    <div class="col-12 col-xl-7">
+                        <?php
+                        if ($fotodecapa == null) {
+                            echo '<img src="../../assets/img/curved-images/curved0.jpg" class="w-100 border-radius-lg img-fluid shadow-sm"';
+                        } else {
+                            echo '<img src="./' . $fotodecapa . '" class="w-100 border-radius-lg img-fluid shadow-sm"';
+                        }
+                        ?>>
 
-                <div class="page-header min-height-300 border-radius-xl mt-4" id="headerDiv" <?php
-                if ($fotodecapa == null) {
-                    echo 'style="background-image: url(\'../../assets/img/curved-images/curved0.jpg\');"';
-                } else {
-                    echo 'style="background-image: url(\'../../utilizador/' . $id . '/' . $fotodecapa . '\');"';
-                }
-                ?>>
-                    <div class="overlay" id="overlay">
-                        <span class="overlay-text">Selecione para alterar a imagem</span>
-                        <input type="file" id="imageUpload" style="display: none;">
+                        <button type="button" class="btn bg-gradient-primary mt-3 w-100">Alterar foto de
+                            capa</button>
+                    </div>
+
+
+                    <div class="col-12 col-xl-1">
+                    </div>
+
+                    <div class="col-12 col-xl-4">
+                        <div class="position-relative">
+                            <img <?php
+
+                            // Obtém a extensão do arquivo em letras minúsculas
+                            $extension = strtolower(pathinfo($fotodeperfil, PATHINFO_EXTENSION));
+
+                            // Verifica se a extensão do arquivo está em um array de extensões de imagem permitidas
+                            $allowed_extensions = array('jpg', 'jpeg', 'png', 'gif'); // Adicione outras extensões se necessário
+                            
+                            // Verifica se a extensão está na lista de extensões permitidas
+                            if (in_array($extension, $allowed_extensions)) {
+                                $google_image = false;
+                            } else {
+                                $google_image = true;
+                            }
+
+
+                            if ($google_image == false) {
+                                echo 'src="../../utilizador/' . $id . '/' . $fotodeperfil . '"';
+                            } else {
+                                echo 'src="' . $fotodeperfil . '"';
+                            }
+                            ?>
+                                alt="profile_image" class="w-100 border-radius-lg img-fluid shadow-sm">
+                        </div>
+
+                        <button type="button" class="btn bg-gradient-primary mt-3 w-100">Alterar foto de Perfil
+                        </button>
                     </div>
                 </div>
-
-                <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
-                    <div class="row gx-4">
-                        <div class="col-auto">
-                            <div class="avatar avatar-xl position-relative">
-                                <img <?php
-
-                                // Obtém a extensão do arquivo em letras minúsculas
-                                $extension = strtolower(pathinfo($fotodeperfil, PATHINFO_EXTENSION));
-
-                                // Verifica se a extensão do arquivo está em um array de extensões de imagem permitidas
-                                $allowed_extensions = array('jpg', 'jpeg', 'png', 'gif'); // Adicione outras extensões se necessário
-                                
-                                // Verifica se a extensão está na lista de extensões permitidas
-                                if (in_array($extension, $allowed_extensions)) {
-                                    $google_image = false;
-                                } else {
-                                    $google_image = true;
-                                }
-
-
-                                if ($google_image == false) {
-                                    echo 'src="../../utilizador/' . $id . '/' . $fotodeperfil . '"';
-                                } else {
-                                    echo 'src="' . $fotodeperfil . '"';
-                                }
-                                ?>
-                     alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-
-                            </div>
-                        </div>
-                        <div class="col-auto my-auto">
-                            <div class="h-100">
-                                <h5 class="mb-1">
-                                    <?php echo $nome; ?>
-                                </h5>
-
-                                <p class="mb-0 font-weight-bold text-sm">
-                                    <?php echo $type_utilizador; ?>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <!-- End Navbar -->
-                <div class="container-fluid fixed-bottom ms-12" style="margin-top: 9.5em; width:90%;">
-                    <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
-                        <div class="row gx-4">
-                            <div class="col-lg-12 col-md-12 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                                <div class="nav-wrapper position-relative end-0 ms-5">
-                                    <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link mb-0 px-0 py-1 active" href="javascript:mostrarSobre();"
-                                                role="tab" id="sobre_nav">
-                                                <i class="fas fa-user-edit text-sm" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Edit Profile"></i>
-                                                <span class="ms-1">Sobre</span>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a class="nav-link mb-0 px-0 py-1" href="javascript:mostrarAgenda();"
-                                                id="agenda_nav" role="tab">
-                                                <i class="ni ni-calendar-grid-58 text-sm" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Agenda"></i>
-                                                <span class="ms-1">Agenda</span>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a class="nav-link mb-0 px-0 py-1" id="projetos_nav"
-                                                href="javascript:mostrarProjetos();" role="tab" aria-selected="false">
-                                                <i class="ni ni-book-bookmark text-sm" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Agenda"></i>
-                                                <span class="ms-1">Projetos</span>
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a class="nav-link mb-0 px-0 py-1" id="perfil_nav"
-                                                href="javascript:mostrarPerfil();" role="tab" aria-selected="false">
-                                                <i class="ni ni-circle-08" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Agenda"></i>
-                                                <span class="ms-1">Foto de Perfil/Capa</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
 
 
 
@@ -716,64 +690,59 @@ $fotodecapa = $row_infos["picture_background"];
 
 
 
-                <div class="col-12 mt-4" id="ver_projetos">
-                    <div class="card mb-4">
-                        <div class="card-header pb-0 p-3">
-                            <h6 class="mb-1">Projects</h6>
-                            <p class="text-sm">Um pouco sobre o meu trabalho</p>
-                        </div>
-                        <div class="card-body p-3">
-                            <div class="row">
+            <div class="col-12 mt-4 d-none" id="ver_projetos">
+                <div class="card mb-4">
+                    <div class="card-body p-3">
+
+                        <div class="row">
 
 
 
-                                <?php
+                            <?php
 
-                                $count = 1001;
-                                $count2 = 1;
+                            $count = 1;
 
-                                // Consulta SQL para obter os dados desejados
-                                $sql = "SELECT * FROM projects WHERE id_founder = $id";
+                            // Consulta SQL para obter os dados desejados
+                            $sql = "SELECT * FROM projects WHERE id_founder = $id";
 
-                                $result = mysqli_query($conn, $sql);
+                            $result = mysqli_query($conn, $sql);
 
-                                // Verifica se a consulta retornou resultados
-                                if (mysqli_num_rows($result) > 0) {
-                                    // Exibindo os dados encontrados
-                                    while ($row = mysqli_fetch_assoc($result)) {
+                            // Verifica se a consulta retornou resultados
+                            if (mysqli_num_rows($result) > 0) {
+                                // Exibindo os dados encontrados
+                                while ($row = mysqli_fetch_assoc($result)) {
 
-                                        $p_id = $row["id"];
-                                        $p_nome = $row["nome"];
-                                        $p_imagem = $row["imagem"];
-                                        $p_sinopse = $row["sinopse"];
-                                        $p_descricao = $row["descricao"];
-                                        $p_local = $row["local"];
-                                        $p_data = $row["data"];
-
-
-                                        // Texto original com quebras de linha
-                                        $texto_original2 = $p_descricao;
-
-                                        // Substituir \n por <br>
-                                        $texto_formatado2 = nl2br(htmlspecialchars($texto_original2)); // Use nl2br para manter as quebras de linha e htmlspecialchars para escapar caracteres especiais HTML
-                                
-
-                                        // Consulta SQL para obter os dados desejados
-                                        $sql2 = "SELECT * FROM projects_images WHERE id_project = $p_id";
-
-                                        $result2 = mysqli_query($conn, $sql2);
-
-                                        $totalRows = mysqli_num_rows($result2);
+                                    $p_id = $row["id"];
+                                    $p_nome = $row["nome"];
+                                    $p_imagem = $row["imagem"];
+                                    $p_sinopse = $row["sinopse"];
+                                    $p_descricao = $row["descricao"];
+                                    $p_local = $row["local"];
+                                    $p_data = $row["data"];
 
 
-                                        echo '
-                            <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                                    // Texto original com quebras de linha
+                                    $texto_original2 = $p_descricao;
+
+                                    // Substituir \n por <br>
+                                    $texto_formatado2 = nl2br(htmlspecialchars($texto_original2)); // Use nl2br para manter as quebras de linha e htmlspecialchars para escapar caracteres especiais HTML
+                            
+
+                                    // Consulta SQL para obter os dados desejados
+                                    $sql2 = "SELECT * FROM projects_images WHERE id_project = $p_id ORDER BY ordem";
+                                    $result2 = mysqli_query($conn, $sql2);
+
+                                    $totalRows = mysqli_num_rows($result2);
+
+
+                                    echo '
+                                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                                         
                                     <div class="card card-blog card-plain">
                                         <div class="position-relative">
                                             <a class="d-block shadow-xl border-radius-xl">
                                                 <img src="' . $p_imagem . '" alt="img-blur-shadow"
-                                                    class="img-fluid shadow border-radius-xl" style="width:235px; height:134px;">
+                                                    class="img-fluid shadow rounded-sm border-radius-xl w-100" style="height: 12.5vw;">
                                             </a>
                                         </div>
                                         <div class="card-body px-1 pb-0">
@@ -787,418 +756,685 @@ $fotodecapa = $row_infos["picture_background"];
 
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="w-100">
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-sm w-100 d-flex justify-content-center text-center mb-0"
-                                                        data-bs-toggle="modal" data-bs-target="#modal-default' . $count . '">Ver
-                                                        Mais</button>
 
-                                                        <button type="button"
-                                                        class="btn btn-outline-primary btn-sm w-100 d-flex justify-content-center text-center mb-0"
-                                                        data-bs-toggle="modal" data-bs-target="#modal-default' . $count . '">Editar</button>
-
-                                                        <button type="button"
-                                                        class="btn btn-outline-primary btn-sm w-100 d-flex justify-content-center text-center mb-0"
-                                                        data-bs-toggle="modal" data-bs-target="#modal-default' . $count . '">Remover</button>
+                                                        <div class="col-md-12">
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button" class="btn btn-outline-primary btn-sm w-100 d-flex justify-content-center text-center mb-0" data-bs-toggle="modal"
+                                                            data-bs-target="#menu' . $count . '">
+                                                            Alterar Projeto
+                                                        </button>
 
                                                         
-                                                    <div class="modal fade" id="modal-default' . $count . '" tabindex="-1"
-                                                    role="dialog" aria-labelledby="modal-default' . $count . '"
-                                                    aria-hidden="true">
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="menu' . $count . '" tabindex="-1" role="dialog"
+                                                            aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">' . $p_nome . ' - Alterar</h5>
+                                                                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
+                                                                            aria-label="Close">
+                                                                            <span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <!-- Button trigger modal -->
+                                                                                <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100"
+                                                                                    data-bs-toggle="modal" data-bs-target="#alterarimagens' . $count . '">
+                                                                                    Alterar Imagens
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="col-6">
+                                                                                <!-- Button trigger modal -->
+                                                                                <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100"
+                                                                                    data-bs-toggle="modal" data-bs-target="#exampleModalMessage3">
+                                                                                    Alterar Informações
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-6">
+                                                                                <!-- Button trigger modal -->
+                                                                                <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100"
+                                                                                    data-bs-toggle="modal" data-bs-target="#exampleModalMessage2">
+                                                                                    Ver Preview
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="col-6">
+                                                                                <!-- Button trigger modal -->
+                                                                                <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100"
+                                                                                    data-bs-toggle="modal" data-bs-target="#exampleModalMessage3">
+                                                                                    Privacidade
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="row d-flex justify-content-center mx-auto">
+                                                                                <!-- Button trigger modal -->
+                                                                                <button type="button" class="btn bg-gradient-danger btn-block mb-3 w-100"
+                                                                                    data-bs-toggle="modal" data-bs-target="#exampleModalMessage3">
+                                                                                    Apagar Projeto
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="modal-footer" style="height: 4em;">
+                                                                                <button type="button" class="btn bg-gradient-secondary"
+                                                                                    data-bs-dismiss="modal">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleModalMessage2" data-bs-backdrop="static" data-bs-keyboard="false"
+                                                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                                <div class="modal-content">
+                                                                    
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Nome do asd - Alterar</h5>
+                                                                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
+                                                                            aria-label="Close">
+                                                                            <span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    
+                                                                    <div class="modal-body">
+                                                        
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn bg-gradient-secondary btn-block"
+                                                                            data-bs-toggle="modal" data-bs-target="#exampleModalMessage1">
+                                                                            Close
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleModalMessage3" data-bs-backdrop="static" data-bs-keyboard="false"
+                                                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">New message to @CT</h5>
+                                                                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
+                                                                            aria-label="Close">
+                                                                            <span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+
+                                                                        <p>DEU modal 3</p>
+
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn bg-gradient-secondary btn-block"
+                                                                            data-bs-toggle="modal" data-bs-target="#exampleModalMessage1">
+                                                                            Close
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+                                                    <div class="modal fade" id="alterarimagens' . $count . '" data-bs-backdrop="static" data-bs-keyboard="false"
+                                                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
 
                                                         <div class="modal-body">
 
-                                                        <div class="row">
-                                                            <div class="mx-auto">
-                                                                
-                                                            <!-- Main Carousel -->
-    <div id="carousel' . $count . '" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">';
 
-                                        if (mysqli_num_rows($result2) > 0) {
-                                            $isActive = true; // For setting the first item as active
-                                            while ($row2 = mysqli_fetch_assoc($result2)) {
-                                                $pi_imagem = $row2["image"];
+                                                        <div class="row sortable-list" id="imageContainer">';
 
-                                                echo '
-                                                        <div class="carousel-item ' . ($isActive ? 'active' : '') . '">
-                                                            <img src="' . $pi_imagem . '" class="d-block rounded" class="d-block rounded"
-                                                            style="margin-left: 2.5%; width:95%; height: 25em;" alt="...">
-                                                        </div>';
 
-                                                $isActive = false; // Set to false after the first item
-                                            }
+                                    if (mysqli_num_rows($result2) > 0) {
+                                        while ($row2 = mysqli_fetch_assoc($result2)) {
+                                            $pi_imagem = $row2["image"];
+                                            $ordem = $row2['ordem'];
+                                            echo '
+                                                    <div class="col-4 mb-3" data-id="' . $ordem . '">
+                                                        <a class="delete-image" data-id="' . $ordem . '">
+                                                            <i class="position-absolute mt-2 p-1 bg-danger rounded-circle" style="opacity: 77.5%; margin-left: 12.5em;">
+                                                                <svg style="width: 2em; height: 2em; color: white;" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 32 32">
+                                                                    <path d="M 15 4 C 14.476563 4 13.941406 4.183594 13.5625 4.5625 C 13.183594 4.941406 13 5.476563 13 6 L 13 7 L 7 7 L 7 9 L 8 9 L 8 25 C 8 26.644531 9.355469 28 11 28 L 23 28 C 24.644531 28 26 26.644531 26 25 L 26 9 L 27 9 L 27 7 L 21 7 L 21 6 C 21 5.476563 20.816406 4.941406 20.4375 4.5625 C 20.058594 4.183594 19.523438 4 19 4 Z M 15 6 L 19 6 L 19 7 L 15 7 Z M 10 9 L 24 9 L 24 25 C 24 25.554688 23.554688 26 23 26 L 11 26 C 10.445313 26 10 25.554688 10 25 Z M 12 12 L 12 23 L 14 23 L 14 12 Z M 16 12 L 16 23 L 18 23 L 18 12 Z M 20 12 L 20 23 L 22 23 L 22 12 Z" fill="rgb(255, 255, 255)"></path>
+                                                                </svg>
+                                                            </i>
+                                                        </a>
+                                                        <img src="' . $pi_imagem . '" class="ui-state-default d-block rounded" style="width:100%; height: 100%;" alt="...">
+                                                    </div>';
                                         }
-
-                                        echo '
+                                    }
+                                    echo '
+                                                    
+                                    
+                                    
+                                                        <div class="col-4 mb-3 fixed-item" id="fixedItem">
+                                                                <label for="fileInput" class="w-100 h-100">
+                                                                    <div class="card card-plain w-100 h-100 border">
+                                                                        <div class="card-body d-flex flex-column justify-content-center text-center" style="width:100%; height: 100%;" >
+                                                                            <i class="fa fa-plus text-secondary mb-3" aria-hidden="true"></i>
+                                                                            <h5 class=" text-secondary"> Adicionar Imagem </h5>
+                                                                        </div>
                                                                     </div>
-                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="prev">
-                                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                                        <span class="visually-hidden">Previous</span>
-                                                                    </button>
-                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="next">
-                                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                                        <span class="visually-hidden">Next</span>
-                                                                    </button>
-                                                                </div>
-
-                                                                <div class="text-justify mt-4"
-                                                                style="width: 95%; margin-left: 2.5%;">
-                                                                <h1 class="title">' . $p_nome . '</h1>
-                                                                <p>' . $texto_formatado2 . '</p>
-
-                                                                <div
-                                                                    class="mt-4 d-inline-flex align-items-center text-dark">
-                                                                    <i class="mb-0 ni ni-send me-2"></i>
-
-                                                                    <dt class="mb-0 me-2">País:
-                                                                    </dt>
-                                                                    <p class="mb-0 me-2">' . $p_local . '</p>
-                                                                </div>
-                                                                <br>
-                                                                <div
-                                                                    class="mt-2 mb-4 d-inline-flex align-items-center text-dark">
-                                                                    <i
-                                                                        class="mb-0 ni ni-watch-time me-2"></i>
-
-                                                                    <dt class="mb-0 me-2"> Data: </dt>
-                                                                    <p class="mb-0 me-2">' . $p_data . '</p>
-                                                                </div>
-
-                                                            </div>
-
+                                                                </label>
+                                                            <input id="fileInput" type="file" style="display: none;">
+                                                        </div>
+                                
+                                
 
                                                         </div>
 
+                                                        <div class="row">
+                                                            <div class="mx-auto">
+
+                                                            
+                                                            <div class="row">
+                                                            ';
+
+                                    if (mysqli_num_rows($result2) > 0) {
+                                        while ($row2 = mysqli_fetch_assoc($result2)) {
+                                            $pi_imagem = $row2["image"];
+
+                                            echo '
+                                                                        <div class="col-4">
+                                                                            <div class="image-container">
+                                                                                <img src="' . $pi_imagem . '" class="d-block rounded" style="margin-bottom: 4em; width: 100%; height: 100%;" alt="...">
+                                                                            </div>
+                                                                        </div>
+                                                                    ';
+                                        }
+                                    }
+
+                                    echo '
+                                    </div>
+                                                                </div>
+                                                        </div>
+
                                                         <div class="modal-footer">
-                                                            <button type="button"
-                                                                class="btn bg-gradient-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Cancelar</button>
+                                                            <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#menu' . $count . '" onclick="guardarimagens()">Confirmar</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
                                                 
                                         ';
 
 
-                                        if ($count2 % 4 == 0) {
-                                            echo '<span class="w-100 mt-5"></span>';
-                                        }
-
-                                        $count++;
-
-                                        $count2++;
-
-
+                                    if ($count % 4 == 0) {
+                                        echo '<span class="w-100 mt-5"></span>';
                                     }
+
+                                    $count++;
+
+
+
                                 }
-
-
-                                ?>
-
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="fixed-plugin">
-                <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-                    <i class="fa fa-cog py-2"> </i>
-                </a>
-                <div class="card shadow-lg ">
-                    <div class="card-header pb-0 pt-3 ">
-                        <div class="float-start">
-                            <h5 class="mt-3 mb-0">Configurations</h5>
-                            <p>See your dashboard options</p>
-                        </div>
-                        <div class="float-end mt-4">
-                            <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                                <i class="fa fa-close"></i>
-                            </button>
-                        </div>
-                        <!-- End Toggle Button -->
-                    </div>
-                    <hr class="horizontal dark my-1">
-                    <div class="card-body pt-sm-3 pt-0">
-                        <!-- Sidebar Backgrounds -->
-                        <div>
-                            <h6 class="mb-0">Sidebar Colors</h6>
-                        </div>
-                        <a href="javascript:void(0)" class="switch-trigger background-color">
-                            <div class="badge-colors my-2 text-start">
-                                <span class="badge filter bg-gradient-primary active" data-color="primary"
-                                    onclick="sidebarColor(this)"></span>
-                                <span class="badge filter bg-gradient-dark" data-color="dark"
-                                    onclick="sidebarColor(this)"></span>
-                                <span class="badge filter bg-gradient-info" data-color="info"
-                                    onclick="sidebarColor(this)"></span>
-                                <span class="badge filter bg-gradient-success" data-color="success"
-                                    onclick="sidebarColor(this)"></span>
-                                <span class="badge filter bg-gradient-warning" data-color="warning"
-                                    onclick="sidebarColor(this)"></span>
-                                <span class="badge filter bg-gradient-danger" data-color="danger"
-                                    onclick="sidebarColor(this)"></span>
-                            </div>
-                        </a>
-                        <!-- Sidenav Type -->
-                        <div class="mt-4">
-                            <h6 class="mb-0">Sidenav Type</h6>
-                            <p class="text-sm">Choose between 2 different sidenav types.</p>
-                        </div>
-                        <div class="d-flex">
-                            <button class="btn bg-gradient-primary w-100 px-3 mb-2 active" data-class="bg-transparent"
-                                onclick="sidebarType(this)">Transparent</button>
-                            <button class="btn bg-gradient-primary w-100 px-3 mb-2 ms-2" data-class="bg-white"
-                                onclick="sidebarType(this)">White</button>
-                        </div>
-                        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop
-                            view.
-                        </p>
-
-                        <hr class="horizontal dark my-sm-4">
-                        <div class="w-100 text-center">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--   Core JS Files   -->
-            <script src="../../assets/js/core/popper.min.js"></script>
-            <script src="../../assets/js/core/bootstrap.min.js"></script>
-            <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-            <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-            <script>
-                var win = navigator.platform.indexOf('Win') > -1;
-                if (win && document.querySelector('#sidenav-scrollbar')) {
-                    var options = {
-                        damping: '0.5'
-                    }
-                    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-                }
-            </script>
-            <!-- Github buttons -->
-            <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-            <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
-
-            <script>
-                $(document).ready(function () {
-                    // Função para verificar e ajustar o texto conforme necessário
-                    $('.comentario').each(function () {
-                        var max_width = $(this).width(); // Largura do elemento <p>
-                        var text_width = $(this)[0].scrollWidth; // Largura real do texto dentro do elemento
-
-                        // Verifica se o texto excede a largura do elemento
-                        if (text_width > max_width) {
-                            // O texto excede a largura - ajusta adicionando "..."
-                            var text = $(this).text();
-                            while ($(this)[0].scrollWidth > max_width) {
-                                text = text.slice(0, -1); // Remove um caractere por vez até caber
-                                $(this).text(text + '...');
                             }
+
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="fixed-plugin">
+
+            <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+                <i class="fa fa-cog py-2"> </i>
+            </a>
+
+            <div class="card shadow-lg ">
+                <div class="card-header pb-0 pt-3 ">
+                    <div class="float-start">
+                        <h5 class="mt-3 mb-0">Configurations</h5>
+                        <p>See your dashboard options</p>
+                    </div>
+                    <div class="float-end mt-4">
+                        <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                            <i class="fa fa-close"></i>
+                        </button>
+                    </div>
+                    <!-- End Toggle Button -->
+                </div>
+                <hr class="horizontal dark my-1">
+                <div class="card-body pt-sm-3 pt-0">
+                    <!-- Sidebar Backgrounds -->
+                    <div>
+                        <h6 class="mb-0">Sidebar Colors</h6>
+                    </div>
+                    <a href="javascript:void(0)" class="switch-trigger background-color">
+                        <div class="badge-colors my-2 text-start">
+                            <span class="badge filter bg-gradient-primary active" data-color="primary"
+                                onclick="sidebarColor(this)"></span>
+                            <span class="badge filter bg-gradient-dark" data-color="dark"
+                                onclick="sidebarColor(this)"></span>
+                            <span class="badge filter bg-gradient-info" data-color="info"
+                                onclick="sidebarColor(this)"></span>
+                            <span class="badge filter bg-gradient-success" data-color="success"
+                                onclick="sidebarColor(this)"></span>
+                            <span class="badge filter bg-gradient-warning" data-color="warning"
+                                onclick="sidebarColor(this)"></span>
+                            <span class="badge filter bg-gradient-danger" data-color="danger"
+                                onclick="sidebarColor(this)"></span>
+                        </div>
+                    </a>
+                    <!-- Sidenav Type -->
+                    <div class="mt-4">
+                        <h6 class="mb-0">Sidenav Type</h6>
+                        <p class="text-sm">Choose between 2 different sidenav types.</p>
+                    </div>
+                    <div class="d-flex">
+                        <button class="btn bg-gradient-primary w-100 px-3 mb-2 active" data-class="bg-transparent"
+                            onclick="sidebarType(this)">Transparent</button>
+                        <button class="btn bg-gradient-primary w-100 px-3 mb-2 ms-2" data-class="bg-white"
+                            onclick="sidebarType(this)">White</button>
+                    </div>
+                    <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop
+                        view.
+                    </p>
+
+                    <hr class="horizontal dark my-sm-4">
+                    <div class="w-100 text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--   Core JS Files   -->
+        <script src="../../assets/js/core/popper.min.js"></script>
+        <script src="../../assets/js/core/bootstrap.min.js"></script>
+        <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+        <script>
+            var win = navigator.platform.indexOf('Win') > -1;
+            if (win && document.querySelector('#sidenav-scrollbar')) {
+                var options = {
+                    damping: '0.5'
+                }
+                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+            }
+        </script>
+        <!-- Github buttons -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
+        <script>
+            function guardarimagens() {
+                // Coloque aqui o código que deseja executar quando o botão for clicado
+                console.log("Botão 'Cancelar' clicado!");
+                // Por exemplo, você pode fechar a modal se necessário
+                // document.getElementById("menu<?php echo $count; ?>").style.display = "none";
+            }
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                // Função para verificar e ajustar o texto conforme necessário
+                $('.comentario').each(function () {
+                    var max_width = $(this).width(); // Largura do elemento <p>
+                    var text_width = $(this)[0].scrollWidth; // Largura real do texto dentro do elemento
+
+                    // Verifica se o texto excede a largura do elemento
+                    if (text_width > max_width) {
+                        // O texto excede a largura - ajusta adicionando "..."
+                        var text = $(this).text();
+                        while ($(this)[0].scrollWidth > max_width) {
+                            text = text.slice(0, -1); // Remove um caractere por vez até caber
+                            $(this).text(text + '...');
                         }
-                    });
+                    }
+                });
+            });
+
+        </script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var headerDiv = document.getElementById('headerDiv');
+                var overlay = document.getElementById('overlay');
+                var imageUpload = document.getElementById('imageUpload');
+
+                // Adicionar evento de clique no texto "Alterar Imagem"
+                overlay.addEventListener('click', function () {
+                    imageUpload.click(); // Quando o texto é clicado, aciona o clique no input de arquivo
                 });
 
-            </script>
+                // Adicionar evento de seleção de arquivo
+                imageUpload.addEventListener('change', function () {
+                    var file = imageUpload.files[0]; // Obter o arquivo selecionado pelo usuário
 
+                    if (file) {
+                        var reader = new FileReader();
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    var headerDiv = document.getElementById('headerDiv');
-                    var overlay = document.getElementById('overlay');
-                    var imageUpload = document.getElementById('imageUpload');
+                        // Callback executado quando a imagem é carregada
+                        reader.onload = function (e) {
+                            // Atualizar o background-image da div com a imagem carregada
+                            headerDiv.style.backgroundImage = 'url(' + e.target.result + ')';
+                        };
 
-                    // Adicionar evento de clique no texto "Alterar Imagem"
-                    overlay.addEventListener('click', function () {
-                        imageUpload.click(); // Quando o texto é clicado, aciona o clique no input de arquivo
-                    });
-
-                    // Adicionar evento de seleção de arquivo
-                    imageUpload.addEventListener('change', function () {
-                        var file = imageUpload.files[0]; // Obter o arquivo selecionado pelo usuário
-
-                        if (file) {
-                            var reader = new FileReader();
-
-                            // Callback executado quando a imagem é carregada
-                            reader.onload = function (e) {
-                                // Atualizar o background-image da div com a imagem carregada
-                                headerDiv.style.backgroundImage = 'url(' + e.target.result + ')';
-                            };
-
-                            // Ler o conteúdo do arquivo como URL de dados
-                            reader.readAsDataURL(file);
-                        }
-                    });
-
-                    // Adicionar evento de mouseover para mostrar a sobreposição
-                    headerDiv.addEventListener('mouseover', function () {
-                        overlay.style.opacity = 1; // Torna a sobreposição visível
-                    });
-
-                    // Adicionar evento de mouseout para ocultar a sobreposição
-                    headerDiv.addEventListener('mouseout', function () {
-                        overlay.style.opacity = 0; // Torna a sobreposição invisível novamente
-                    });
-                });
-            </script>
-
-
-
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    var sobre_nav = document.getElementById('sobre_nav');
-                    sobre_nav.classList.remove('px-0');
-                    sobre_nav.classList.add('px-4');
-
+                        // Ler o conteúdo do arquivo como URL de dados
+                        reader.readAsDataURL(file);
+                    }
                 });
 
+                // Adicionar evento de mouseover para mostrar a sobreposição
+                headerDiv.addEventListener('mouseover', function () {
+                    overlay.style.opacity = 1; // Torna a sobreposição visível
+                });
 
-
-                function mostrarAgenda() {
-                    var sobre = document.getElementById('ver_sobre');
-                    var projetos = document.getElementById('ver_projetos');
-                    var agenda = document.getElementById('ver_agenda');
-                    var perfil = document.getElementById('ver_perfil');
-                    var sobre_nav = document.getElementById('sobre_nav');
-                    var perfil_nav = document.getElementById('perfil_nav');
-                    var agenda_nav = document.getElementById('agenda_nav');
-                    var projetos_nav = document.getElementById('projetos_nav');
-
-                    console.log(sobre, projetos, agenda, perfil); // Verifique se os elementos foram corretamente obtidos
-
-                    perfil.classList.add('d-none');
-                    perfil_nav.classList.remove('active');
-
-                    agenda.classList.remove('d-none');
-                    agenda_nav.classList.add('active');
-
-                    sobre.classList.add('d-none');
-                    sobre_nav.classList.remove('active');
-
-                    projetos.classList.add('d-none');
-                    projetos_nav.classList.remove('active');
-                }
+                // Adicionar evento de mouseout para ocultar a sobreposição
+                headerDiv.addEventListener('mouseout', function () {
+                    overlay.style.opacity = 0; // Torna a sobreposição invisível novamente
+                });
+            });
+        </script>
 
 
 
-                function mostrarSobre() {
-                    var sobre = document.getElementById('ver_sobre');
-                    var projetos = document.getElementById('ver_projetos');
-                    var agenda = document.getElementById('ver_agenda');
-                    var perfil = document.getElementById('ver_perfil');
-                    var sobre_nav = document.getElementById('sobre_nav');
-                    var perfil_nav = document.getElementById('perfil_nav');
-                    var agenda_nav = document.getElementById('agenda_nav');
-                    var projetos_nav = document.getElementById('projetos_nav');
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var sobre_nav = document.getElementById('sobre_nav');
+                sobre_nav.classList.remove('px-0');
+                sobre_nav.classList.add('px-4');
 
-                    console.log(sobre, projetos, agenda, perfil, 'aaaaaaaaaaaaaaaa'); // Verifique se os elementos foram corretamente obtidos
-
-
-                    perfil.classList.add('d-none');
-                    perfil_nav.classList.remove('active');
-
-                    agenda.classList.add('d-none');
-                    agenda_nav.classList.remove('active');
-
-                    sobre.classList.remove('d-none');
-                    sobre_nav.classList.add('active');
-
-                    projetos.classList.add('d-none');
-                    projetos_nav.classList.remove('active');
-                }
-
-
-                function mostrarProjetos() {
-                    var sobre = document.getElementById('ver_sobre');
-                    var projetos = document.getElementById('ver_projetos');
-                    var agenda = document.getElementById('ver_agenda');
-                    var perfil = document.getElementById('ver_perfil');
-                    var sobre_nav = document.getElementById('sobre_nav');
-                    var perfil_nav = document.getElementById('perfil_nav');
-                    var agenda_nav = document.getElementById('agenda_nav');
-                    var projetos_nav = document.getElementById('projetos_nav');
-
-                    console.log(sobre, projetos, agenda, perfil); // Verifique se os elementos foram corretamente obtidos
-
-                    perfil.classList.add('d-none');
-                    perfil_nav.classList.remove('active');
-
-                    agenda.classList.add('d-none');
-                    agenda_nav.classList.remove('active');
-
-                    sobre.classList.add('d-none');
-                    sobre_nav.classList.remove('active');
-
-                    projetos.classList.remove('d-none');
-                    projetos_nav.classList.add('active');
-                }
-
-                function mostrarPerfil() {
-                    var sobre = document.getElementById('ver_sobre');
-                    var projetos = document.getElementById('ver_projetos');
-                    var agenda = document.getElementById('ver_agenda');
-                    var perfil = document.getElementById('ver_perfil');
-                    var sobre_nav = document.getElementById('sobre_nav');
-                    var perfil_nav = document.getElementById('perfil_nav');
-                    var agenda_nav = document.getElementById('agenda_nav');
-                    var projetos_nav = document.getElementById('projetos_nav');
-
-                    console.log(sobre, projetos, agenda, perfil); // Verifique se os elementos foram corretamente obtidos
-
-                    perfil.classList.remove('d-none');
-                    perfil_nav.classList.add('active');
-
-                    agenda.classList.add('d-none');
-                    agenda_nav.classList.remove('active');
-
-                    sobre.classList.add('d-none');
-                    sobre_nav.classList.remove('active');
-
-                    projetos.classList.add('d-none');
-                    projetos_nav.classList.remove('active');
-                }
-
-            </script>
+            });
 
 
 
-            <script>
-                function mostrarTextoCompleto() {
-                    var divTexto = document.getElementById('textoDiv');
-                    var btnVerMais = document.getElementById('verMaisBtn');
+            function mostrarAgenda() {
+                var sobre = document.getElementById('ver_sobre');
+                var projetos = document.getElementById('ver_projetos');
+                var agenda = document.getElementById('ver_agenda');
+                var perfil = document.getElementById('ver_perfil');
+                var sobre_nav = document.getElementById('sobre_nav');
+                var perfil_nav = document.getElementById('perfil_nav');
+                var agenda_nav = document.getElementById('agenda_nav');
+                var projetos_nav = document.getElementById('projetos_nav');
 
-                    // Remover a limitação de altura para mostrar todo o texto
-                    divTexto.style.maxHeight = 'none';
+                console.log(sobre, projetos, agenda, perfil); // Verifique se os elementos foram corretamente obtidos
 
-                    // Ocultar o botão "ver mais" após expandir o texto
-                    btnVerMais.style.display = 'none';
-                }
+                perfil.classList.add('d-none');
+                perfil_nav.classList.remove('active');
 
-                // Verificar se o texto na div ultrapassa a altura máxima
+                agenda.classList.remove('d-none');
+                agenda_nav.classList.add('active');
+
+                sobre.classList.add('d-none');
+                sobre_nav.classList.remove('active');
+
+                projetos.classList.add('d-none');
+                projetos_nav.classList.remove('active');
+            }
+
+
+
+            function mostrarSobre() {
+                var sobre = document.getElementById('ver_sobre');
+                var projetos = document.getElementById('ver_projetos');
+                var agenda = document.getElementById('ver_agenda');
+                var perfil = document.getElementById('ver_perfil');
+                var sobre_nav = document.getElementById('sobre_nav');
+                var perfil_nav = document.getElementById('perfil_nav');
+                var agenda_nav = document.getElementById('agenda_nav');
+                var projetos_nav = document.getElementById('projetos_nav');
+
+                console.log(sobre, projetos, agenda, perfil, 'aaaaaaaaaaaaaaaa'); // Verifique se os elementos foram corretamente obtidos
+
+
+                perfil.classList.add('d-none');
+                perfil_nav.classList.remove('active');
+
+                agenda.classList.add('d-none');
+                agenda_nav.classList.remove('active');
+
+                sobre.classList.remove('d-none');
+                sobre_nav.classList.add('active');
+
+                projetos.classList.add('d-none');
+                projetos_nav.classList.remove('active');
+            }
+
+
+            function mostrarProjetos() {
+                var sobre = document.getElementById('ver_sobre');
+                var projetos = document.getElementById('ver_projetos');
+                var agenda = document.getElementById('ver_agenda');
+                var perfil = document.getElementById('ver_perfil');
+                var sobre_nav = document.getElementById('sobre_nav');
+                var perfil_nav = document.getElementById('perfil_nav');
+                var agenda_nav = document.getElementById('agenda_nav');
+                var projetos_nav = document.getElementById('projetos_nav');
+
+                console.log(sobre, projetos, agenda, perfil); // Verifique se os elementos foram corretamente obtidos
+
+                perfil.classList.add('d-none');
+                perfil_nav.classList.remove('active');
+
+                agenda.classList.add('d-none');
+                agenda_nav.classList.remove('active');
+
+                sobre.classList.add('d-none');
+                sobre_nav.classList.remove('active');
+
+                projetos.classList.remove('d-none');
+                projetos_nav.classList.add('active');
+            }
+
+            function mostrarPerfil() {
+                var sobre = document.getElementById('ver_sobre');
+                var projetos = document.getElementById('ver_projetos');
+                var agenda = document.getElementById('ver_agenda');
+                var perfil = document.getElementById('ver_perfil');
+                var sobre_nav = document.getElementById('sobre_nav');
+                var perfil_nav = document.getElementById('perfil_nav');
+                var agenda_nav = document.getElementById('agenda_nav');
+                var projetos_nav = document.getElementById('projetos_nav');
+
+                console.log(sobre, projetos, agenda, perfil); // Verifique se os elementos foram corretamente obtidos
+
+                perfil.classList.remove('d-none');
+                perfil_nav.classList.add('active');
+
+                agenda.classList.add('d-none');
+                agenda_nav.classList.remove('active');
+
+                sobre.classList.add('d-none');
+                sobre_nav.classList.remove('active');
+
+                projetos.classList.add('d-none');
+                projetos_nav.classList.remove('active');
+            }
+
+        </script>
+
+
+
+        <script>
+            function mostrarTextoCompleto() {
                 var divTexto = document.getElementById('textoDiv');
                 var btnVerMais = document.getElementById('verMaisBtn');
 
-                if (divTexto.scrollHeight > divTexto.clientHeight) {
-                    // Mostrar o botão "ver mais" se o texto estiver cortado
-                    btnVerMais.style.display = 'block';
-                }
+                // Remover a limitação de altura para mostrar todo o texto
+                divTexto.style.maxHeight = 'none';
 
-            </script>
+                // Ocultar o botão "ver mais" após expandir o texto
+                btnVerMais.style.display = 'none';
+            }
+
+            // Verificar se o texto na div ultrapassa a altura máxima
+            var divTexto = document.getElementById('textoDiv');
+            var btnVerMais = document.getElementById('verMaisBtn');
+
+            if (divTexto.scrollHeight > divTexto.clientHeight) {
+                // Mostrar o botão "ver mais" se o texto estiver cortado
+                btnVerMais.style.display = 'block';
+            }
+
+        </script>
+
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const fileInput = document.getElementById('fileInput');
+                const imageContainer = document.getElementById('imageContainer');
+                const fixedItem = document.getElementById('fixedItem');
+
+                fileInput.addEventListener('change', function () {
+                    const files = this.files;
+                    if (files.length > 0) {
+                        // Encontrar o maior data-id existente
+                        let lastDataId = 0;
+                        const existingDivs = imageContainer.querySelectorAll('.col-4[data-id]');
+                        existingDivs.forEach(div => {
+                            const dataId = parseInt(div.getAttribute('data-id'));
+                            if (!isNaN(dataId) && dataId > lastDataId) {
+                                lastDataId = dataId;
+                            }
+                        });
+
+                        Array.from(files).forEach((file, index) => {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                const imageUrl = e.target.result;
+                                const newId = lastDataId + index + 1; // Incrementar o último data-id
+                                displayImageBeforeFixedItem(imageUrl, newId);
+                            };
+                            reader.readAsDataURL(file);
+                        });
+                    }
+                });
+
+                function displayImageBeforeFixedItem(imageUrl, newId) {
+                    const div = document.createElement('div');
+                    div.classList.add('col-4', 'mb-3', 'ui-sortable-handle');
+                    div.setAttribute('data-id', newId); // Definir o novo data-id
+                    div.innerHTML = `
+                    <a class="delete-image" data-id="${newId}"><i class="position-absolute mt-2 p-1 bg-danger rounded-circle" style="opacity: 77.5%; margin-left: 12.5em;"><svg style="width: 2em; height: 2em; color: white;" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 32 32">
+                        <path d="M 15 4 C 14.476563 4 13.941406 4.183594 13.5625 4.5625 C 13.183594 4.941406 13 5.476563 13 6 L 13 7 L 7 7 L 7 9 L 8 9 L 8 25 C 8 26.644531 9.355469 28 11 28 L 23 28 C 24.644531 28 26 26.644531 26 25 L 26 9 L 27 9 L 27 7 L 21 7 L 21 6 C 21 5.476563 20.816406 4.941406 20.4375 4.5625 C 20.058594 4.183594 19.523438 4 19 4 Z M 15 6 L 19 6 L 19 7 L 15 7 Z M 10 9 L 24 9 L 24 25 C 24 25.554688 23.554688 26 23 26 L 11 26 C 10.445313 26 10 25.554688 10 25 Z M 12 12 L 12 23 L 14 23 L 14 12 Z M 16 12 L 16 23 L 18 23 L 18 12 Z M 20 12 L 20 23 L 22 23 L 22 12 Z" fill="rgb(255, 255, 255)"></path>
+                    </svg></i>  </a>
+                    <img src="${imageUrl}" class="ui-state-default d-block rounded" style="width:100%; height: 100%;" alt="...">
+                </div>
+                   
+        `;
+        
+                    // Inserir a nova div antes do elemento 'fixedItem' no 'imageContainer'
+                    imageContainer.insertBefore(div, fixedItem);
+
+                    // Adicionar evento de clique para o link de exclusão
+                    const deleteLink = div.querySelector('.delete-image');
+                    deleteLink.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const dataId = this.getAttribute('data-id');
+                        const divToDelete = imageContainer.querySelector(`.col-4[data-id="${dataId}"]`);
+                        console.log(dataId);
+                        if (divToDelete) {
+                            divToDelete.remove(); // Remover a div correspondente
+                        }
+                    });
+                }
+            });
+
+
+            function setupDeleteLinks() {
+                // Selecionar todos os elementos com a classe delete-image
+                const deleteLinks = document.querySelectorAll('.delete-image');
+                console.log(deleteLinks);
+
+                // Iterar sobre cada link de exclusão e adicionar o manipulador de evento
+                deleteLinks.forEach(deleteLink => {
+                    deleteLink.addEventListener('click', function (e) {
+                        e.preventDefault(); // Evitar o comportamento padrão do link
+
+                        const dataId = this.getAttribute('data-id'); // Obter o atributo data-id do link clicado
+                        console.log(dataId);
+
+                        const divToDelete = document.querySelector(`.col-4[data-id="${dataId}"]`); // Encontrar a div correspondente
+                        console.log(divToDelete);
+
+                        if (divToDelete) {
+                            divToDelete.remove(); // Remover a div correspondente se encontrada
+                            console.log(`Elemento com data-id ${dataId} removido`);
+                        } else {
+                            console.log(`Elemento com data-id ${dataId} não encontrado`);
+                        }
+                    });
+                });
+            }
+
+            // Chamar a função setupDeleteLinks assim que o documento HTML estiver carregado
+            document.addEventListener('DOMContentLoaded', () => {
+                setupDeleteLinks();
+            });
+
+
+
+        </script>
+
+
+
+        <script>
+            // Selecionar o elemento textarea pelo ID
+            const textarea = document.getElementById('alterar_sobre');
+
+            // Selecionar os elementos de contagem de caracteres e palavras
+            const contadorCaracteres = document.getElementById('contador_caracteres');
+            const contadorPalavras = document.getElementById('contador_palavras');
+
+            // Adicionar um ouvinte de eventos de entrada (input) ao textarea
+            textarea.addEventListener('input', () => {
+                // Obter o conteúdo atual do textarea
+                const texto = textarea.value;
+
+                // Contar o número de caracteres (incluindo espaços em branco)
+                const numeroCaracteres = texto.length;
+                contadorCaracteres.textContent = numeroCaracteres;
+
+                // Contar o número de palavras
+                const palavras = texto.match(/\S+/g); // Expressão regular para encontrar palavras (sequências de caracteres não espaços em branco)
+                const numeroPalavras = palavras ? palavras.length : 0;
+                contadorPalavras.textContent = numeroPalavras;
+            });
+        </script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+
 
 </body>
 
