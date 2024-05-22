@@ -1,0 +1,288 @@
+          <!-- Modal -->
+                                                        <div class="modal fade" id="splitModal" tabindex="-1" aria-labelledby="splitModalLabel" data-bs-keyboard="false" data-bs-backdrop="static" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                                <div class="modal-content">
+                                                                    
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">' . $p_nome . ' - Privacidade </h5>
+                                                                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
+                                                                            aria-label="Close">
+                                                                            <span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    ';
+                        ?>
+
+                                <div class="modal-body" style="padding: 0px;">
+                                    <div class="modalcompletoprivacidade">
+                                        <div class="row h-100">
+                                            <div class="col-4">
+                                                <div class="left-pane w-100 h-100 mx-auto">
+                                                    <div class="radio-input">
+                                                        <div id="DivProjeto">
+                                                            <input type="radio" id="value-1" name="value-radio" value="value-3" onclick="showProject()">
+                                                            <label for="value-1">
+                                                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABsUlEQVR4nO2YMUvDQBTHf4rYRaWzfgHBCn4FNycVByfdBaud3B0FP4KCs7uD7iLtoNZJVweVdhHUxcUnB6/lCE2a2ti7hPvDg0vukbzf+ydHchDkr0rAHlAHvjTMeAeYICeaA5qAxMQ1UCYHTjS14EdgDZjWWAeedO4KGMNj7VsQvbpetmBW8VgNLdI4EacNzTnHY31qkeZRitNMwvvjS9Ad9JHrQiWAROS64xIcich1xyU4EpHrjkueHDka4v5egUgCjDcg70A7Ze6BryAvwBIwD7z2yW0Diz6C3AOz1nUqQCsFRCXijFOQS+tjdBlYSICJQnTmD12DnFq/yFvAtxbXCyYOQiyYkYP8WF00qum5Xp0378xD5Pjtj+5nCmK6vq35xo2TmLyWdt5oPMEJcQHyAaxo7hRw0Se/nZETkjXImeaZFeou5c2NA5tDOiH/8WgdA88ZFCWuQVwGAQT3LkihHSnpJnbD2sQ246rO5QbkNiEpaS6Nm1lI0oIM1Y2igIgHgesCAggRRzq78XkP6kUBqRYFZHKAz26fY+B/CF+jK+PMLnCT0wUgKCgoKIiR6xep8tEcHYPuTwAAAABJRU5ErkJggg==" alt="Ícone Projeto">
+                                                                Projeto
+                                                            </label>
+                                                        </div>
+
+                                                        <div id="DivGostos">
+                                                            <input type="radio" id="value-2" name="value-radio" value="value-2" onclick="showLikes()">
+                                                            <label for="value-2">
+                                                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC3UlEQVR4nO2azUtUYRTGfwR1py81NA2iEipoU7tqWVBoQZFL003rQFKJVu1aqSVFQbQKXPQHVFO5dRESrctRIUr7IK2W+VG+8cIRZLpz575fdy7iAw8Mzp3nPY/vO+eec+7ABtYvdgEdwBBQBCaAn8CiUL9+L+/pay4BDeQEEdANjAJ/AGVI/ZmXQJdoZY6tQD/w2SL4SpwFeoFCVibOA9MeDZRzCmgPaUBv/b2ABso5IjvvFS3A2wxNKOEboNmXiVbZblUjTkoMTtgtaVTVmNPAHlsThRodJ5VwzKxS9MMcBK/KeN8mxaqcsi2tCb19pRwErCpwKu1Nsz8HwaoqvJZmN2ZzEKiqwplqX/zuHASpUvJykpFRC8HfwB3gOLAdqJdaaSzm2jF5r16uPQEMAwsW675I6idMS3Fd/R6toLcJ6AP+Cvvkb3E4BnwxXHsZqIsT6zAUWpL/aDVcFVbDSQnOJIaLcUK3DUUe4x8jhjEMxokUDUXOBjDSbhjD0ziRSUORxgBGmgxj0AXtf5g3FNkSwEhkGMNcnMiiocihAEYOG8aw4MOITqe+cd2HkR+GIjrvb/NoYgfwzTCG73FCNhXvTY9Gblmsrwd+zulXyQ3slAcTZyxuhqpS+h2yENL8CuxzMHHQImMq4YCPEqW82dlrYeIA8MFh3Qtxog2W89tVlgzHNkeAjw7rLVUqGjVeOQgrOSKnU5g4B/xyXOt50gJdjuKruf1Kwho3HHdeCTuzanV1s7V5jfZO4Ikn7U9pSqReT4tpvgb2S9/ic4LfQwoUPM965yxbWZVQ8Uah+oKsuGLTBz3IQeCqjHexQCSDY5UTjrv0QE05eqzQgiNaLdpgnyxJKeMFzTU6ZuPysCnIw9CVjEw8Cv3svS3wUZsINGqKRSSj/RmPBnTZ0VOrX0BEMhUvWnZ4y1LFdgYaL1mhTmaxeoz5TPrp+TU/qtGv30l7OiBNkS4kN7Au8Q+VNlCnUHu31AAAAABJRU5ErkJggg==" alt="Ícone Contagem de Gostos">
+                                                                Contagem de Gostos
+                                                            </label>
+                                                        </div>
+
+                                                        <div id="DivComentarios">
+                                                            <input type="radio" id="value-3" name="value-radio" value="value-3" onclick="showComments()">
+                                                            <label for="value-3">
+                                                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACL0lEQVR4nO2ZT0sVYRTGf2UIgUEZKJnQIvsAgpVb/QgS4ndwr3RbZf4p3BgVfQMFLRHvyp3fQEt3RX8o6IbmptRrmyMDZxEXbnNm5tyZ98I88Gwu3HOe8877nvPMO1CiRAkPXASGgQrwFtgHjoC/yiP97Q3wELiv/ykc/cAC8B2QhPwGzAM3ixB+HXgNnKUQ3sg68Arozkv8BHDoILyRB8B4K4Vf0lWXFvOl5nLFZaCag3hRbmpOF3QA6zmKF2XV60nksW2kCV94HFgpmA/Siu/WzlB0AYfatttq60jWrdTvNKS8WE86sRdiAkZ+phM/dKqP+l/OuSRtM87bdOGPKzE5v1oN4LDhkVZa8AQeGfLeswSzBCqK05YCipi6YuSapYD9AIRKE763FPDLEOgDsAg8deKixozLGw3WWFj6/238ccc4D2Jxagg0EHIBNeMWmtGu4MEnwEevLbTX7od4JQCh0oSrlgKmAxAqWQbZoCGQ1cxZTJok4JClgAtqnLzMXJxJEyPNZg7tMB5mzmrSxMDZBItGj3Ee5MU60EdCfApAuCifJxU/EIBoUf4EriUtYDIA4aIcIwU2AxAuwFIa8VHn+B2A+Graq8WRAMRvZLncfRZAx+kgA3YKEl5Le2AbcWJM+FkHTFbhp7rqV3HCdpNEf7Q7Tf7zRtYLPAa+pPQ2s8ANnHEL2AKOgV09E6MG7xO52ClgWV88fujqnulFwTu9Foks8d1QPrOWKEGb4xws8HXGpqFIIgAAAABJRU5ErkJggg==" alt="Ícone Gostos">
+                                                                Comentarios
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-8" style="padding-left: 0px;">
+                                                <div class="right-pane w-100 h-100 mx-auto" style="padding-left: 0px;" id="rightPaneContent">
+                                                    <!-- Conteúdo dinâmico será carregado aqui -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <?php echo '
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Cancelar</button>
+                                                                        <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#menu' . $count . '" onclick="guardarprivacidade()">Confirmar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+    <script>
+        var projetos;
+        var gostos;
+        var comentarios;
+
+        function selectCard(cardId) {
+            var cards = document.getElementsByClassName('card-button');
+            var totalImages = 9;
+            var selectedCard = document.getElementById(cardId);
+
+
+
+            // Verificando se o elemento foi encontrado
+            if (selectedCard) {
+                selecao = selectedCard.id;
+                selecao = cardId.replace("cardButton", "");
+                if (selecao <= 3) {
+                    projetos = selecao;
+                } else if (selecao <= 6) {
+                    gostos = selecao;
+                } else {
+                    comentarios = selecao;
+                }
+
+                if (projetos == 2 && gostos == 4) {
+                    gostos = 5;
+                }
+
+
+                if (projetos == 2 && comentarios == 7) {
+                    comentarios = 8;
+                }
+            }
+
+            // Remove 'active' class from all cards
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].classList.remove('active');
+            }
+
+            // Add 'active' class to the selected card
+            if (selectedCard) {
+                selectedCard.classList.add('active');
+            }
+
+            // Reset filter for all images
+            for (var i = 1; i <= totalImages; i++) {
+                var image = document.getElementById("image" + i);
+                if (image) {
+                    image.style.filter = "invert(0)";
+                }
+            }
+
+            if (projetos == 3) {
+                document.getElementById("DivGostos").classList.add('d-none');
+                document.getElementById("DivComentarios").classList.add('d-none');
+            } else {
+                document.getElementById("DivGostos").classList.remove('d-none');
+                document.getElementById("DivComentarios").classList.remove('d-none');
+            }
+
+            // Apply filter to the selected image
+            switch (cardId) {
+                case "cardButton1":
+                    if (document.getElementById("image1")) {
+                        document.getElementById("image1").style.filter = "invert(1)";
+                    }
+                    break;
+                case "cardButton2":
+                    if (document.getElementById("image2")) {
+                        document.getElementById("image2").style.filter = "invert(1)";
+                    }
+                    break;
+                case "cardButton3":
+                    if (document.getElementById("image3")) {
+                        document.getElementById("image3").style.filter = "invert(1)";
+                    }
+                    break;
+                case "cardButton4":
+                    if (document.getElementById("image4")) {
+                        document.getElementById("image4").style.filter = "invert(1)";
+                    }
+                    break;
+                case "cardButton5":
+                    if (document.getElementById("image5")) {
+                        document.getElementById("image5").style.filter = "invert(1)";
+                    }
+                    break;
+                case "cardButton6":
+                    if (document.getElementById("image6")) {
+                        document.getElementById("image6").style.filter = "invert(1)";
+                    }
+                    break;
+                case "cardButton7":
+                    if (document.getElementById("image7")) {
+                        document.getElementById("image7").style.filter = "invert(1)";
+                    }
+                    break;
+                case "cardButton8":
+                    if (document.getElementById("image8")) {
+                        document.getElementById("image8").style.filter = "invert(1)";
+                    }
+                    break;
+                case "cardButton9":
+                    if (document.getElementById("image9")) {
+                        document.getElementById("image9").style.filter = "invert(1)";
+                    }
+                    break;
+            }
+        }
+
+        function showLikes() {
+
+            document.getElementById('rightPaneContent').innerHTML = `
+            <div style="transition: 1s linear;">
+                <div id="cardButton4" class="card card-button m-2 ${gostos == 4 ? "active" : ""} ${projetos == 2 ? "d-none" : ""}" onclick="selectCard('cardButton4')" style="height: 80px; transition: height 0.3s ease;">
+                    <div class="card-body d-flex align-items-center" style="height: 80px;">
+                        <img id="image4" ${gostos == 4 ? "style='filter: invert(1);'" : ""}  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEQklEQVR4nO2Za4hVVRTHf46a10TElF4aDSkEJQhK0EtChaZMP6QQZjXR44NCH4Sgh5QJ9kAhJMoHfZhR0CBHJImiEose1lCWWr6gIsVKSzN6UOo4c2Nd/ic2l3P22eec63iF84fDMHP++7/3OnvttdZeAyVKlChRABcC84B1wE7gN+AM8DLnCSrAIuB3oBrz9ABX0uS4AvjSWfQBYDEwA7gaeE1/Pwl8CCwABtFkGA18p4X+BMyK4YwDPgJ+cYzdCgyhidClhe0FRgXwZ8lgG/MK/YwWYAqwUi50RGdhPtAH/A20ZtCbJDezILAceBs4DPwB/AlcfzaMGC+/jjvAffr5Ug7dVxM0q8BnwFRgcKOMmKivZOIngFXAbGAycNSZOM8XnKqxvwJ3aa4J2pFI92vgmqJGjNB2m+AbOtT1RkaRyFwvKy7SeHNRF+Z2TwN79P5bYHgBO2o5wYQ+BS6IeT9ArmU7lRd9euJgeWmH1vB4gTnYJZFpHs5fQC8wNId+Rfr/eDi3i7ObnBgInAL+TUlc2zTRLTnmmKKxX3k4Q1QR9OTNOQP0pS3e+/BMgai1XmOXpPCOiHcZOXFUBznufER4X5M8mUN/pca+6+G0yH2NN5KCGbvNw4kmyRNVrtLYHwPcbycF8IVEHvJwolIjS1aP0Kaxn3g4CwPOUSp6JTLMw1kjzhbgkgzaVkR2a+xTHt5QJznauc2FgxK40cMZrexrvNUZtLdozJ4U379JvB8ogOVO5h7r4U0Qb3+G0H5cO27VQxIu19ymvYwCsLi9WUIPp0SWKEReF6B7W+ABbhfvzZTIGYQ7JLY9hfeCeB+k1F2DnLPxWIrmNvHm0gBUnCrX7h5JGOnwng8w+FBKELnHKSh97pcJ0RZ/Hsjb5OFsEse6LATwHqWBuEGiduf2YZ54GzycqAlxd4rWhkBeJkyX6DspvAfE6/RwOsUxrg8dAUEmc+SKSpW1geHakmRaAk0Lp0vEs6vEpRQ85A8qN1RVU12bwLUo9YgaCVX1spIwU5wzGtPiSbQHxbVO5VLllWBcDDwHHHNKg290R48ztt25xdnzYsAcKxz+DmmYVj2sbH/L4Z7S2bEEnAjrVjyrtk40sFthsD4Ztco1XGN/Bu4lHO1OEq1Ka1lC8Xkz8DpwWtxeufnwuF342GnvbE7I0ON0WHvqjL0/4YumoaKx3XX94U7NVY8x2s2TTkOw1a17tjv3ArO+HgN1EzztbHFHgrvlhWl1SLuquRYnnKHxTqG6O+p93ac/HFcjOs6ILme3Os5yR71Vc0SNv41aQz1GqCL+P0S/p1+eSBBeqvfWNJtD/2GO06iz4BOH+Xpv1+3aTkTh9UTME/WdbqX/0ebsjO+p9dX2BRAtYpwrdAWsr1Y6DVblGvd8L+Kd59CQ2VqDffBcqDiZuhmenpwhvpYE9zaBAVUnZzTsXwwlSpQoUYJG4D8zfL5hqU0xoAAAAABJRU5ErkJggg==">
+                        <div class="ms-4">
+                            <h5 class="card-title mb-1" style="margin-bottom: 0.25em;">Publico</h5>
+                            <p class="card-text description">Qualquer pessoa pode ver...</p>
+                        </div>
+                    </div>
+                </div>
+
+                    <div id="cardButton5" class="card card-button m-2 ${gostos == 5 ? "active" : ""}" onclick="selectCard('cardButton5')">
+                        <div class="card-body d-flex align-items-center" style="height: 80px;">
+                            <img id="image5" ${gostos == 5 ? "style='filter: invert(1);'" : ""} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAD1klEQVR4nO2ZW4hVZRTHf2UmTaijOZqXQRON8vZgF8UbgqIiJqgYpuaLL6EpGARB0IsEgkWKIT54Q0VFFO8OGKigMhghhHdMbZRUEmOscRyo3LHkv2FxnLPPvsmc5PxgP5xvr//a33V96/sOVKhQocLzzsvAXGAbUA/8BvwD3ANOAEuAVyhzpgI3gaDEcxYYD7SjDJmnnreKXgQ+B94HegEvAa8DHwJXXIMuAyMoIwYCzarcyhI93RdYBfwi+7+AYZQJG1Wp3QnX0h7p6igDXtRCDjQySagGHkj7Jm3McDff07BTeltjbco0VWR/Sv1X0i+njZmnimxNqf9C+hVF1tFMrb0LCgwWVM4DX2tq5sYsVcQWbhqWS28j4xms6Rq1H10HPgFezaEdjJXTUyn1W6Vf6Mpsz7nj1t4i4G1VuAoYB/zsGvQT8FrWhtTK2e8p9WGvv+PK1qnsJNCxiK6TNthLst1BDoTh942EOuv5x5r37d26aJQ/G4VS9JL+X6APGWjvpsFHCbVzpbvnGjLcpTlx2SeNrdfUTJSTcxruJFQrAgXy48P5kQR+vpVmGRmYLieHU+oPS29+wgzafh9M4GO1NEvJQD85uZ9iRDoDf0hvyaQxWr/PpJhas8nIcRcKLYrFoa/THHPlXVX2QHlcHG6nzPWeotal5XF7ZY7srxY03s4uTXpnm2Ip3pLt3y5gZOLLhKnKdtkvLigfo3LrmJoYfroD16QxbWb6K5Y/irGfmG2LTpQ9ikRB2wzjckqaCeTEFjk8UMLuoOw2t/KutzqkWUflUoxQ51mn9CQneroFHEVoU+zDm52NTZ1idHd2mzLUO7KSWWw66CrJbBZE2C2QTb00ZdcQ42PZ/BhhUy+b+eTMkIQNGRphUxXDV6DHbHOjVgedQLcqUWyQ3a9uR4+qaNr3iegCfOZ21/oYPWRXpqdlf1eXebaje/rovaX0xWhMmE20yrvAeuCh65mjaljczLfOZbrvuXcvAN/p3aEYYXyNNIkbEFYg0MHoB+CDBLlRiNkPKEgiF+uiIdDeMCpCP1KpSaCT4tI4FxJ2cluriodD/k1OF2s1OlP40b2lG5RSTAcanK5Zo9nq/lPt0oAW3XzEnUJxksc/3eja9Jyh5DEu7dSgOmUF4Z2y+W51LjZoauXFEjfC+3K6zB4C7HUd82n4YpIKmwrmc1aGaXQf67onbxbJd4sax64iF2hZWecizrPie33D1vaTOB/oAJMntxNc+aRlkL5hf/892X2DHJ9u+kjefoOI54Z9cEpBeMv6hJFkcs5+gyJPg9pQoUKFCvx/+A8kSpPCW6utKAAAAABJRU5ErkJggg==">
+                            <div class="ms-4">
+                                <h5 class="card-title mb-1">Apenas Seguidores</h5>
+                                <p class="card-text description">Apenas quem lhe segue pode ver...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cardButton6" class="card card-button m-2 ${gostos == 6 ? "active" : ""}" onclick="selectCard('cardButton6')">
+                        <div class="card-body d-flex align-items-center" style="height: 75px;">
+                            <img id="image6" ${gostos == 6 ? "style='filter: invert(1);'" : ""} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEBElEQVR4nO2azW+UVRTGfw11OoYizgDiQhNZEoyyFpeNQhojuEPLToIbPlLZomz4sLBq0oS/Q20IEDVNULAgtiz4ELqxwIIPFyqtTWuGnPC8yUmd6XvfO3dmiuFJbvpxzz333HvPPfecZwae4/+LKrAdOAGMAjeAP4A5Nfv9uvpM5kOgwjJBGdgFnAX+BWoF2wJwBhgAejqxgBeBz4F7zqh/gO+BQzqZjdrxF9Qq+p/1fQH8oDHZ+LvAoDanLegHppwBl4BPgdURul4GdgOXnb7bwDZaCNupU27CX4D3EurfCvzq9I+04nReleE2wWNgL7Ai9SQ81bkfmHGnvT6V8g067pqizpu0Hm8BNzXnLdnQFNY5hePAWtqHCnBec0/JK6JQdu70E7CS9mMlcNG5WdSdOeXcyR67IijL138G/lYzg/ZFvBdrnFdYACgcYrOLXfROvA5cXeIRnABei7gzMxpv0S34scveCYtORU8iW8SkNqRXrd/1TUSczAF3+YNc7KB7J1ZETjYp4xdjVROb1K0NqGmeJVF2aUfMYzeusbb7jbBdMnZnimKbxt7JO9EBFyFi8JfG1zsNfyom82eE/i4XST9eSvCchCx3ikF2oVPJ1cMejT1dt1chdkEZaUwC2K6FVFTfzDeyc4eUfxc5QbsWYhjT+A+og5PqtHoiFCXgq0V1SdFmdcgx6QrFYY0dqtc5qk4rQUNxvIkFLG5HC8ybec839Tp/U6dVcaG4qzHvEI8t7mRCsUljjBf4Dx6ps0he1ayvx+pZK/n79Trn1Fl6BhbS43iCtiykX6/wdE4dnnQhD9VpaXMo8gyYdjK/N6GnkWs9SHXZ8wzwbMtUE3oKXfZvI8JvngF9TqavCT2Nwu/XSz2IRp6FIsSAVDLBD2KWXhsDGIoQA6zcvZBAT3CKUnFJozGAyzX8Vl3S+FIjoTNSuLsFBqTS85lkLaVqiE8kZFxskRTF0oxYvCsd9t6EFFZXJL8zr9TNjHs/QPGxhEnjkQLsznQIeTEo4SsB5ENJi8kWH9PuaBF5GUW3SI2a+LFclB3XayTbcsGgbLpZhErK2IoZkWOdxmZgNpbdGXE7UCT/So11IuXMluEYBWXRQhkH1QkSu1cPak0/e5rZjRtSNK6/24Uq8KPmvp3iA58N7mjNzd6mPXfilua0rPyNVIrXOzebEfdq4TA1uhWdZp07vZJ6krILADURyqk+fe3SYzfp9A+3+rP3re7Ya+Ji90R+i6Gq3ClLO2pypZSfFueezgG9ypkBc0qvv1Ths0lhu6S2Rh8afSSZMccTZGnHvk59A6JHrPhplQBF05N5ZbE7O7WAelitQmdIDOB1ERrZl2rs92sqT4ck27CeeA6ecTwBhN3E7TcZQfQAAAAASUVORK5CYII=">
+                            <div class="ms-4">
+                                <h5 class="card-title mb-1">Apenas Eu</h5>
+                                <p class="card-text description">Ninguém exceto você pode ver...</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            `;
+        }
+
+
+        function showComments() {
+            document.getElementById('rightPaneContent').innerHTML = `
+                <div style="transition: 1s linear;">
+                    <div id="cardButton7" class="card card-button m-2 ${comentarios == 7 ? "active" : ""} ${projetos == 2 ? "d-none" : ""}" onclick="selectCard('cardButton7')" style="height: 80px;">
+                        <div class="card-body d-flex align-items-center" style="padding-top: 12px;">
+                            <img id="image7" ${comentarios == 7 ? "style='filter: invert(1);'" : ""} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEQklEQVR4nO2Za4hVVRTHf46a10TElF4aDSkEJQhK0EtChaZMP6QQZjXR44NCH4Sgh5QJ9kAhJMoHfZhR0CBHJImiEose1lCWWr6gIsVKSzN6UOo4c2Nd/ic2l3P22eec63iF84fDMHP++7/3OnvttdZeAyVKlChRABcC84B1wE7gN+AM8DLnCSrAIuB3oBrz9ABX0uS4AvjSWfQBYDEwA7gaeE1/Pwl8CCwABtFkGA18p4X+BMyK4YwDPgJ+cYzdCgyhidClhe0FRgXwZ8lgG/MK/YwWYAqwUi50RGdhPtAH/A20ZtCbJDezILAceBs4DPwB/AlcfzaMGC+/jjvAffr5Ug7dVxM0q8BnwFRgcKOMmKivZOIngFXAbGAycNSZOM8XnKqxvwJ3aa4J2pFI92vgmqJGjNB2m+AbOtT1RkaRyFwvKy7SeHNRF+Z2TwN79P5bYHgBO2o5wYQ+BS6IeT9ArmU7lRd9euJgeWmH1vB4gTnYJZFpHs5fQC8wNId+Rfr/eDi3i7ObnBgInAL+TUlc2zTRLTnmmKKxX3k4Q1QR9OTNOQP0pS3e+/BMgai1XmOXpPCOiHcZOXFUBznufER4X5M8mUN/pca+6+G0yH2NN5KCGbvNw4kmyRNVrtLYHwPcbycF8IVEHvJwolIjS1aP0Kaxn3g4CwPOUSp6JTLMw1kjzhbgkgzaVkR2a+xTHt5QJznauc2FgxK40cMZrexrvNUZtLdozJ4U379JvB8ogOVO5h7r4U0Qb3+G0H5cO27VQxIu19ymvYwCsLi9WUIPp0SWKEReF6B7W+ABbhfvzZTIGYQ7JLY9hfeCeB+k1F2DnLPxWIrmNvHm0gBUnCrX7h5JGOnwng8w+FBKELnHKSh97pcJ0RZ/Hsjb5OFsEse6LATwHqWBuEGiduf2YZ54GzycqAlxd4rWhkBeJkyX6DspvAfE6/RwOsUxrg8dAUEmc+SKSpW1geHakmRaAk0Lp0vEs6vEpRQ85A8qN1RVU12bwLUo9YgaCVX1spIwU5wzGtPiSbQHxbVO5VLllWBcDDwHHHNKg290R48ztt25xdnzYsAcKxz+DmmYVj2sbH/L4Z7S2bEEnAjrVjyrtk40sFthsD4Ztco1XGN/Bu4lHO1OEq1Ka1lC8Xkz8DpwWtxeufnwuF342GnvbE7I0ON0WHvqjL0/4YumoaKx3XX94U7NVY8x2s2TTkOw1a17tjv3ArO+HgN1EzztbHFHgrvlhWl1SLuquRYnnKHxTqG6O+p93ac/HFcjOs6ILme3Os5yR71Vc0SNv41aQz1GqCL+P0S/p1+eSBBeqvfWNJtD/2GO06iz4BOH+Xpv1+3aTkTh9UTME/WdbqX/0ebsjO+p9dX2BRAtYpwrdAWsr1Y6DVblGvd8L+Kd59CQ2VqDffBcqDiZuhmenpwhvpYE9zaBAVUnZzTsXwwlSpQoUYJG4D8zfL5hqU0xoAAAAABJRU5ErkJggg==">
+                            <div class="ms-4">
+                                <h5 class="card-title mb-1" style="margin-bottom: 0.25em;">Publico</h5>
+                                <p class="card-text description">Qualquer pessoa pode ver...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cardButton8" class="card card-button m-2 ${comentarios == 8 ? "active" : ""}" onclick="selectCard('cardButton8')">
+                        <div class="card-body d-flex align-items-center" style="height: 80px;">
+                            <img id="image8" ${comentarios == 8 ? "style='filter: invert(1);'" : ""} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAD1klEQVR4nO2ZW4hVZRTHf2UmTaijOZqXQRON8vZgF8UbgqIiJqgYpuaLL6EpGARB0IsEgkWKIT54Q0VFFO8OGKigMhghhHdMbZRUEmOscRyo3LHkv2FxnLPPvsmc5PxgP5xvr//a33V96/sOVKhQocLzzsvAXGAbUA/8BvwD3ANOAEuAVyhzpgI3gaDEcxYYD7SjDJmnnreKXgQ+B94HegEvAa8DHwJXXIMuAyMoIwYCzarcyhI93RdYBfwi+7+AYZQJG1Wp3QnX0h7p6igDXtRCDjQySagGHkj7Jm3McDff07BTeltjbco0VWR/Sv1X0i+njZmnimxNqf9C+hVF1tFMrb0LCgwWVM4DX2tq5sYsVcQWbhqWS28j4xms6Rq1H10HPgFezaEdjJXTUyn1W6Vf6Mpsz7nj1t4i4G1VuAoYB/zsGvQT8FrWhtTK2e8p9WGvv+PK1qnsJNCxiK6TNthLst1BDoTh942EOuv5x5r37d26aJQ/G4VS9JL+X6APGWjvpsFHCbVzpbvnGjLcpTlx2SeNrdfUTJSTcxruJFQrAgXy48P5kQR+vpVmGRmYLieHU+oPS29+wgzafh9M4GO1NEvJQD85uZ9iRDoDf0hvyaQxWr/PpJhas8nIcRcKLYrFoa/THHPlXVX2QHlcHG6nzPWeotal5XF7ZY7srxY03s4uTXpnm2Ip3pLt3y5gZOLLhKnKdtkvLigfo3LrmJoYfroD16QxbWb6K5Y/irGfmG2LTpQ9ikRB2wzjckqaCeTEFjk8UMLuoOw2t/KutzqkWUflUoxQ51mn9CQneroFHEVoU+zDm52NTZ1idHd2mzLUO7KSWWw66CrJbBZE2C2QTb00ZdcQ42PZ/BhhUy+b+eTMkIQNGRphUxXDV6DHbHOjVgedQLcqUWyQ3a9uR4+qaNr3iegCfOZ21/oYPWRXpqdlf1eXebaje/rovaX0xWhMmE20yrvAeuCh65mjaljczLfOZbrvuXcvAN/p3aEYYXyNNIkbEFYg0MHoB+CDBLlRiNkPKEgiF+uiIdDeMCpCP1KpSaCT4tI4FxJ2cluriodD/k1OF2s1OlP40b2lG5RSTAcanK5Zo9nq/lPt0oAW3XzEnUJxksc/3eja9Jyh5DEu7dSgOmUF4Z2y+W51LjZoauXFEjfC+3K6zB4C7HUd82n4YpIKmwrmc1aGaXQf67onbxbJd4sax64iF2hZWecizrPie33D1vaTOB/oAJMntxNc+aRlkL5hf/892X2DHJ9u+kjefoOI54Z9cEpBeMv6hJFkcs5+gyJPg9pQoUKFCvx/+A8kSpPCW6utKAAAAABJRU5ErkJggg==">
+                            <div class="ms-4">
+                                <h5 class="card-title mb-1">Apenas Seguidores</h5>
+                                <p class="card-text description">Apenas quem lhe segue pode ver...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cardButton9" class="card card-button m-2 ${comentarios == 9 ? "active" : ""}" onclick="selectCard('cardButton9')">
+                        <div class="card-body d-flex align-items-center" style="height: 75px;">
+                            <img id="image9" ${comentarios == 9 ? "style='filter: invert(1);'" : ""} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEBElEQVR4nO2azW+UVRTGfw11OoYizgDiQhNZEoyyFpeNQhojuEPLToIbPlLZomz4sLBq0oS/Q20IEDVNULAgtiz4ELqxwIIPFyqtTWuGnPC8yUmd6XvfO3dmiuFJbvpxzz333HvPPfecZwae4/+LKrAdOAGMAjeAP4A5Nfv9uvpM5kOgwjJBGdgFnAX+BWoF2wJwBhgAejqxgBeBz4F7zqh/gO+BQzqZjdrxF9Qq+p/1fQH8oDHZ+LvAoDanLegHppwBl4BPgdURul4GdgOXnb7bwDZaCNupU27CX4D3EurfCvzq9I+04nReleE2wWNgL7Ai9SQ81bkfmHGnvT6V8g067pqizpu0Hm8BNzXnLdnQFNY5hePAWtqHCnBec0/JK6JQdu70E7CS9mMlcNG5WdSdOeXcyR67IijL138G/lYzg/ZFvBdrnFdYACgcYrOLXfROvA5cXeIRnABei7gzMxpv0S34scveCYtORU8iW8SkNqRXrd/1TUSczAF3+YNc7KB7J1ZETjYp4xdjVROb1K0NqGmeJVF2aUfMYzeusbb7jbBdMnZnimKbxt7JO9EBFyFi8JfG1zsNfyom82eE/i4XST9eSvCchCx3ikF2oVPJ1cMejT1dt1chdkEZaUwC2K6FVFTfzDeyc4eUfxc5QbsWYhjT+A+og5PqtHoiFCXgq0V1SdFmdcgx6QrFYY0dqtc5qk4rQUNxvIkFLG5HC8ybec839Tp/U6dVcaG4qzHvEI8t7mRCsUljjBf4Dx6ps0he1ayvx+pZK/n79Trn1Fl6BhbS43iCtiykX6/wdE4dnnQhD9VpaXMo8gyYdjK/N6GnkWs9SHXZ8wzwbMtUE3oKXfZvI8JvngF9TqavCT2Nwu/XSz2IRp6FIsSAVDLBD2KWXhsDGIoQA6zcvZBAT3CKUnFJozGAyzX8Vl3S+FIjoTNSuLsFBqTS85lkLaVqiE8kZFxskRTF0oxYvCsd9t6EFFZXJL8zr9TNjHs/QPGxhEnjkQLsznQIeTEo4SsB5ENJi8kWH9PuaBF5GUW3SI2a+LFclB3XayTbcsGgbLpZhErK2IoZkWOdxmZgNpbdGXE7UCT/So11IuXMluEYBWXRQhkH1QkSu1cPak0/e5rZjRtSNK6/24Uq8KPmvp3iA58N7mjNzd6mPXfilua0rPyNVIrXOzebEfdq4TA1uhWdZp07vZJ6krILADURyqk+fe3SYzfp9A+3+rP3re7Ya+Ji90R+i6Gq3ClLO2pypZSfFueezgG9ypkBc0qvv1Ths0lhu6S2Rh8afSSZMccTZGnHvk59A6JHrPhplQBF05N5ZbE7O7WAelitQmdIDOB1ERrZl2rs92sqT4ck27CeeA6ecTwBhN3E7TcZQfQAAAAASUVORK5CYII=">
+                            <div class="ms-4">
+                                <h5 class="card-title mb-1">Apenas Eu</h5>
+                                <p class="card-text description">Ninguém exceto você pode ver...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showProject() {
+            document.getElementById('rightPaneContent').innerHTML = `
+                <div style="transition: 1s linear;">
+                    <div id="cardButton1" class="card card-button m-2 ${projetos == 1 ? "active" : ""}"  onclick="selectCard('cardButton1')" style="height: 80px;">
+                        <div class="card-body d-flex align-items-center" style="padding-top: 12px;">
+                            <img ${projetos == 1 ? "style='filter: invert(1);'" : ""} id="image1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEQklEQVR4nO2Za4hVVRTHf46a10TElF4aDSkEJQhK0EtChaZMP6QQZjXR44NCH4Sgh5QJ9kAhJMoHfZhR0CBHJImiEose1lCWWr6gIsVKSzN6UOo4c2Nd/ic2l3P22eec63iF84fDMHP++7/3OnvttdZeAyVKlChRABcC84B1wE7gN+AM8DLnCSrAIuB3oBrz9ABX0uS4AvjSWfQBYDEwA7gaeE1/Pwl8CCwABtFkGA18p4X+BMyK4YwDPgJ+cYzdCgyhidClhe0FRgXwZ8lgG/MK/YwWYAqwUi50RGdhPtAH/A20ZtCbJDezILAceBs4DPwB/AlcfzaMGC+/jjvAffr5Ug7dVxM0q8BnwFRgcKOMmKivZOIngFXAbGAycNSZOM8XnKqxvwJ3aa4J2pFI92vgmqJGjNB2m+AbOtT1RkaRyFwvKy7SeHNRF+Z2TwN79P5bYHgBO2o5wYQ+BS6IeT9ArmU7lRd9euJgeWmH1vB4gTnYJZFpHs5fQC8wNId+Rfr/eDi3i7ObnBgInAL+TUlc2zTRLTnmmKKxX3k4Q1QR9OTNOQP0pS3e+/BMgai1XmOXpPCOiHcZOXFUBznufER4X5M8mUN/pca+6+G0yH2NN5KCGbvNw4kmyRNVrtLYHwPcbycF8IVEHvJwolIjS1aP0Kaxn3g4CwPOUSp6JTLMw1kjzhbgkgzaVkR2a+xTHt5QJznauc2FgxK40cMZrexrvNUZtLdozJ4U379JvB8ogOVO5h7r4U0Qb3+G0H5cO27VQxIu19ymvYwCsLi9WUIPp0SWKEReF6B7W+ABbhfvzZTIGYQ7JLY9hfeCeB+k1F2DnLPxWIrmNvHm0gBUnCrX7h5JGOnwng8w+FBKELnHKSh97pcJ0RZ/Hsjb5OFsEse6LATwHqWBuEGiduf2YZ54GzycqAlxd4rWhkBeJkyX6DspvAfE6/RwOsUxrg8dAUEmc+SKSpW1geHakmRaAk0Lp0vEs6vEpRQ85A8qN1RVU12bwLUo9YgaCVX1spIwU5wzGtPiSbQHxbVO5VLllWBcDDwHHHNKg290R48ztt25xdnzYsAcKxz+DmmYVj2sbH/L4Z7S2bEEnAjrVjyrtk40sFthsD4Ztco1XGN/Bu4lHO1OEq1Ka1lC8Xkz8DpwWtxeufnwuF342GnvbE7I0ON0WHvqjL0/4YumoaKx3XX94U7NVY8x2s2TTkOw1a17tjv3ArO+HgN1EzztbHFHgrvlhWl1SLuquRYnnKHxTqG6O+p93ac/HFcjOs6ILme3Os5yR71Vc0SNv41aQz1GqCL+P0S/p1+eSBBeqvfWNJtD/2GO06iz4BOH+Xpv1+3aTkTh9UTME/WdbqX/0ebsjO+p9dX2BRAtYpwrdAWsr1Y6DVblGvd8L+Kd59CQ2VqDffBcqDiZuhmenpwhvpYE9zaBAVUnZzTsXwwlSpQoUYJG4D8zfL5hqU0xoAAAAABJRU5ErkJggg==">
+                            <div class="ms-4">
+                                <h5 class="card-title mb-1" style="margin-bottom: 0.25em;">Publico</h5>
+                                <p class="card-text description">Qualquer pessoa pode ver...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cardButton2" class="card card-button m-2 ${projetos == 2 ? "active" : ""}" onclick="selectCard('cardButton2')">
+                        <div class="card-body d-flex align-items-center" style="height: 80px;">
+                            <img ${projetos == 2 ? "style='filter: invert(1);'" : ""} id="image2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAD1klEQVR4nO2ZW4hVZRTHf2UmTaijOZqXQRON8vZgF8UbgqIiJqgYpuaLL6EpGARB0IsEgkWKIT54Q0VFFO8OGKigMhghhHdMbZRUEmOscRyo3LHkv2FxnLPPvsmc5PxgP5xvr//a33V96/sOVKhQocLzzsvAXGAbUA/8BvwD3ANOAEuAVyhzpgI3gaDEcxYYD7SjDJmnnreKXgQ+B94HegEvAa8DHwJXXIMuAyMoIwYCzarcyhI93RdYBfwi+7+AYZQJG1Wp3QnX0h7p6igDXtRCDjQySagGHkj7Jm3McDff07BTeltjbco0VWR/Sv1X0i+njZmnimxNqf9C+hVF1tFMrb0LCgwWVM4DX2tq5sYsVcQWbhqWS28j4xms6Rq1H10HPgFezaEdjJXTUyn1W6Vf6Mpsz7nj1t4i4G1VuAoYB/zsGvQT8FrWhtTK2e8p9WGvv+PK1qnsJNCxiK6TNthLst1BDoTh942EOuv5x5r37d26aJQ/G4VS9JL+X6APGWjvpsFHCbVzpbvnGjLcpTlx2SeNrdfUTJSTcxruJFQrAgXy48P5kQR+vpVmGRmYLieHU+oPS29+wgzafh9M4GO1NEvJQD85uZ9iRDoDf0hvyaQxWr/PpJhas8nIcRcKLYrFoa/THHPlXVX2QHlcHG6nzPWeotal5XF7ZY7srxY03s4uTXpnm2Ip3pLt3y5gZOLLhKnKdtkvLigfo3LrmJoYfroD16QxbWb6K5Y/irGfmG2LTpQ9ikRB2wzjckqaCeTEFjk8UMLuoOw2t/KutzqkWUflUoxQ51mn9CQneroFHEVoU+zDm52NTZ1idHd2mzLUO7KSWWw66CrJbBZE2C2QTb00ZdcQ42PZ/BhhUy+b+eTMkIQNGRphUxXDV6DHbHOjVgedQLcqUWyQ3a9uR4+qaNr3iegCfOZ21/oYPWRXpqdlf1eXebaje/rovaX0xWhMmE20yrvAeuCh65mjaljczLfOZbrvuXcvAN/p3aEYYXyNNIkbEFYg0MHoB+CDBLlRiNkPKEgiF+uiIdDeMCpCP1KpSaCT4tI4FxJ2cluriodD/k1OF2s1OlP40b2lG5RSTAcanK5Zo9nq/lPt0oAW3XzEnUJxksc/3eja9Jyh5DEu7dSgOmUF4Z2y+W51LjZoauXFEjfC+3K6zB4C7HUd82n4YpIKmwrmc1aGaXQf67onbxbJd4sax64iF2hZWecizrPie33D1vaTOB/oAJMntxNc+aRlkL5hf/892X2DHJ9u+kjefoOI54Z9cEpBeMv6hJFkcs5+gyJPg9pQoUKFCvx/+A8kSpPCW6utKAAAAABJRU5ErkJggg==">
+                            <div class="ms-4">
+                                <h5 class="card-title mb-1">Apenas Seguidores</h5>
+                                <p class="card-text description">Apenas quem lhe segue pode ver...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cardButton3" class="card card-button m-2 ${projetos == 3 ? "active" : ""}" onclick="selectCard('cardButton3')">
+                        <div class="card-body d-flex align-items-center" style="height: 75px;">
+                            <img ${projetos == 3 ? "style='filter: invert(1);'" : ""}  id="image3" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEBElEQVR4nO2azW+UVRTGfw11OoYizgDiQhNZEoyyFpeNQhojuEPLToIbPlLZomz4sLBq0oS/Q20IEDVNULAgtiz4ELqxwIIPFyqtTWuGnPC8yUmd6XvfO3dmiuFJbvpxzz333HvPPfecZwae4/+LKrAdOAGMAjeAP4A5Nfv9uvpM5kOgwjJBGdgFnAX+BWoF2wJwBhgAejqxgBeBz4F7zqh/gO+BQzqZjdrxF9Qq+p/1fQH8oDHZ+LvAoDanLegHppwBl4BPgdURul4GdgOXnb7bwDZaCNupU27CX4D3EurfCvzq9I+04nReleE2wWNgL7Ai9SQ81bkfmHGnvT6V8g067pqizpu0Hm8BNzXnLdnQFNY5hePAWtqHCnBec0/JK6JQdu70E7CS9mMlcNG5WdSdOeXcyR67IijL138G/lYzg/ZFvBdrnFdYACgcYrOLXfROvA5cXeIRnABei7gzMxpv0S34scveCYtORU8iW8SkNqRXrd/1TUSczAF3+YNc7KB7J1ZETjYp4xdjVROb1K0NqGmeJVF2aUfMYzeusbb7jbBdMnZnimKbxt7JO9EBFyFi8JfG1zsNfyom82eE/i4XST9eSvCchCx3ikF2oVPJ1cMejT1dt1chdkEZaUwC2K6FVFTfzDeyc4eUfxc5QbsWYhjT+A+og5PqtHoiFCXgq0V1SdFmdcgx6QrFYY0dqtc5qk4rQUNxvIkFLG5HC8ybec839Tp/U6dVcaG4qzHvEI8t7mRCsUljjBf4Dx6ps0he1ayvx+pZK/n79Trn1Fl6BhbS43iCtiykX6/wdE4dnnQhD9VpaXMo8gyYdjK/N6GnkWs9SHXZ8wzwbMtUE3oKXfZvI8JvngF9TqavCT2Nwu/XSz2IRp6FIsSAVDLBD2KWXhsDGIoQA6zcvZBAT3CKUnFJozGAyzX8Vl3S+FIjoTNSuLsFBqTS85lkLaVqiE8kZFxskRTF0oxYvCsd9t6EFFZXJL8zr9TNjHs/QPGxhEnjkQLsznQIeTEo4SsB5ENJi8kWH9PuaBF5GUW3SI2a+LFclB3XayTbcsGgbLpZhErK2IoZkWOdxmZgNpbdGXE7UCT/So11IuXMluEYBWXRQhkH1QkSu1cPak0/e5rZjRtSNK6/24Uq8KPmvp3iA58N7mjNzd6mPXfilua0rPyNVIrXOzebEfdq4TA1uhWdZp07vZJ6krILADURyqk+fe3SYzfp9A+3+rP3re7Ya+Ji90R+i6Gq3ClLO2pypZSfFueezgG9ypkBc0qvv1Ths0lhu6S2Rh8afSSZMccTZGnHvk59A6JHrPhplQBF05N5ZbE7O7WAelitQmdIDOB1ERrZl2rs92sqT4ck27CeeA6ecTwBhN3E7TcZQfQAAAAASUVORK5CYII=">
+                            <div class="ms-4">
+                                <h5 class="card-title mb-1">Apenas Eu</h5>
+                                <p class="card-text description">Ninguém exceto você pode ver...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
