@@ -87,7 +87,7 @@ if ($result) {
 
 
 
-// Conexão com o banco de dados (substitua com suas credenciais)
+// Conexão com o banco de dados (subsktitua com suas credenciais)
 $db_host = "localhost";
 $db_name = "concertpulse";
 $db_user = "root";
